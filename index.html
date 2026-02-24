@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -42,21 +41,35 @@ const media = document.getElementById("media");
 function showImages(){
   media.innerHTML = `<img src="borgo croci.jpg" class="w-full h-96 object-cover"/>`;
 }
+
 function showMap(){
   media.innerHTML = `<iframe class="w-full h-96" src="https://maps.google.com/maps?q=41.4658,15.5444&z=16&output=embed"></iframe>`;
 }
+
 function showVideo(){
   media.innerHTML = `<iframe class="w-full h-96" src="https://www.youtube.com/embed/kwnDu858Qas" allowfullscreen></iframe>`;
 }
+
 function show3D(){
   media.innerHTML = `<iframe class="w-full h-96" src="https://sketchfab.com/models/c2e4aae984aa462f81993e089648866d/embed" allowfullscreen></iframe>`;
 }
+
 function showText(){
   fetch('approfondimento.txt')
-  .then(res=>res.text())
-  .then(data=>{
-    document.getElementById("textArea").innerText = data;
+  .then(res => {
+    if(!res.ok){
+      throw new Error("File non trovato");
+    }
+    return res.text();
   })
+  .then(data => {
+    // Mantiene eventuali ritorni a capo del file txt
+    document.getElementById("textArea").innerHTML = data.replace(/\n/g, "<br>");
+  })
+  .catch(err => {
+    document.getElementById("textArea").innerHTML = "Errore nel caricamento dell'approfondimento. Verifica che il file 'approfondimento.txt' sia nella stessa cartella dell'HTML.";
+    console.error(err);
+  });
 }
 </script>
 </body>
