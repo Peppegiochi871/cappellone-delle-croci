@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cappellone delle Croci</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+<div class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+  <!-- LEFT -->
+  <div>
+    <div id="media" class="rounded-xl overflow-hidden shadow cursor-pointer">
+      <img id="mainImage" src="ct+.jpg" class="w-full h-96 object-cover"/>
+    </div>
+
+    <div class="flex justify-between mt-4 text-center text-sm">
+      <button onclick="showImages()">🖼️<br/>Immagini</button>
+      <button onclick="showMap()">📍<br/>Mappa</button>
+      <button onclick="showVideo()">🎬<br/>Video</button>
+      <button onclick="show3D()">🧊<br/>3D</button>
+      <button onclick="showText()">📖<br/>Approfondimento</button>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="bg-white p-6 rounded-xl shadow leading-relaxed text-gray-700">
+    <div id="textArea">
+      <p><strong>Il Cappellone delle Croci</strong>, noto anche come Chiesa delle Croci o Chiesa del Monte Calvario, è uno dei principali monumenti storici di Foggia e Monumento Nazionale. Sorge nel Borgo Croci, quartiere nato dopo il terremoto del 1731.</p><br>
+      <p>Il complesso fu fondato nel 1693, in seguito a una processione guidata dal frate cappuccino Antonio de Olivadi, ritenuta miracolosa per la fine della siccità. Da questo evento ebbe origine il percorso della Via Crucis, completato nel 1740.</p><br>
+      <p>Esempio di barocco povero, il complesso comprende un arco monumentale, cinque cappelle, una chiesetta e una cripta. All’interno si conservano una tela della Salita al Calvario e una reliquia del Santo Legno della Croce. La cripta fu anche luogo di riunioni carbonare nell’Ottocento.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const media = document.getElementById("media");
+
+function showImages(){
+  media.innerHTML = `<img src="borgo croci.jpg" class="w-full h-96 object-cover"/>`;
+}
+function showMap(){
+  media.innerHTML = `<iframe class="w-full h-96" src="https://maps.google.com/maps?q=41.4658,15.5444&z=16&output=embed"></iframe>`;
+}
+function showVideo(){
+  media.innerHTML = `<iframe class="w-full h-96" src="https://www.youtube.com/embed/kwnDu858Qas" allowfullscreen></iframe>`;
+}
+function show3D(){
+  media.innerHTML = `<iframe class="w-full h-96" src="https://sketchfab.com/models/c2e4aae984aa462f81993e089648866d/embed" allowfullscreen></iframe>`;
+}
+function showText(){
+  fetch('approfondimento.txt')
+  .then(res=>res.text())
+  .then(data=>{
+    document.getElementById("textArea").innerText = data;
+  })
+}
+</script>
+</body>
+</html>
